@@ -44,7 +44,7 @@ const removeTodo = function(db, callback) {
   // Get the documents collection
   const collection = db.collection('todo');
   // Delete document where a is 3
-  collection.deleteOne({text: "Learn Mysql"}), function(err, result) {
+  collection.deleteOne({text: "Learn MongoDB"}), function(err, result) {
     assert.equal(err, null);
     assert.equal(1, result.result.n);
     console.log("Removed the document ");
@@ -52,18 +52,18 @@ const removeTodo = function(db, callback) {
   };
 }
 
-// const updateTodo = function(db, callback) {
-//   // Get the documents collection
-//   const collection = db.collection('todo');
-//   // Update document where a is 2, set b equal to 1
-//   collection.updateOne({ text: "Learn Mysql" }
-//     , { $set: { text: "Learn Javascript" } }, function(err, result) {
-//     assert.equal(err, null);
-//     assert.equal(1, result.result.n);
-//     console.log("Updated the document");
-//     callback(result);
-//   });
-// }
+const updateTodo = function(db, callback) {
+  // Get the documents collection
+  const collection = db.collection('todo');
+  // Update document where a is 2, set b equal to 1
+  collection.updateOne({ text: "Learn Mysql" },
+   { $set: { text: "Learn Javascript" } }, function(err, result) {
+    assert.equal(err, null);
+    assert.equal(1, result.result.n);
+    console.log("Updated the document");
+    callback(result);
+  });
+}
 
 mongodb.MongoClient.connect(url, (err, client) => {
   assert.equal(null, err);
@@ -86,9 +86,9 @@ mongodb.MongoClient.connect(url, (err, client) => {
     client.close();
   });
 
-  // updateTodo(db, result => {
-  //   console.log(result);
-  //   client.close();
-  // });
+  updateTodo(db, result => {
+    // console.log(result);
+    // client.close();
+  });
 
 });
